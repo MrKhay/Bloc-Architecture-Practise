@@ -15,9 +15,7 @@ class AppRouter {
     switch (settings.name) {
       case home:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(
-            title: Strings.homeScreenTitle,
-          ),
+          builder: (_) => const HomeScreen(),
         );
 
       case details:

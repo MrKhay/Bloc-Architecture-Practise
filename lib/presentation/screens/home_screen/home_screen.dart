@@ -1,86 +1,65 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_practise/presentation/router/app_router.dart';
+import 'dart:math' show Random;
 
-import '../../../core/constants/strings.dart';
-import '../../../logic/bloc/counter_bloc/bloc/counter_bloc.dart';
+const names = ['Foo', 'Bar', 'Baz'];
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: BlocBuilder<CounterBloc, CounterState>(
-        builder: (context, state) {
-          if (state is CounterInitial) {
-            return CounterWidget(height: height, width: width, counter: 0);
-          } else if (state is UpdateCounter) {
-            return CounterWidget(
-              height: height,
-              width: width,
-              counter: state.counter,
-            );
-          }
-          return Container();
-        },
-      ),
-    );
-  }
+extension RandomElement<T> on Iterable<T> {
+  T getRandomElement() => elementAt(Random().nextInt(length));
 }
 
-class CounterWidget extends StatelessWidget {
-  const CounterWidget(
-      {super.key,
-      required this.height,
-      required this.width,
-      required this.counter});
+class NamesCubit extends Cubit<String?> {
+  NamesCubit() : super(null);
 
-  final double height;
-  final double width;
-  final int counter;
+  void pickRandomName() => emit(names.getRandomElement());
+}
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final NamesCubit cubit;
+  @override
+  void initState() {
+    cubit = NamesCubit();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    cubit.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var counterBloc = context.read<CounterBloc>();
-    return Center(
-      child: Container(
-        height: height * 0.3,
-        width: width * 0.8,
-        color: Colors.amber,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              counter.toString(),
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      counterBloc.add(NumberIncrement());
-                    },
-                    icon: const Icon(Icons.plus_one)),
-                IconButton(
-                    onPressed: () {
-                      counterBloc.add(NumberDecrement());
-                    },
-                    icon: const Icon(Icons.exposure_minus_1)),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+    return Scaffold(
+        body: StreamBuilder<String?>(
+            stream: cubit.stream,
+            builder: (context, snapshot) {
+              final button = Center(
+                child: TextButton(
+                    onPressed: () => cubit.pickRandomName(),
+                    child: const Text('Get Random Name')),
+              );
+
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return button;
+                case ConnectionState.waiting:
+                  return button;
+                case ConnectionState.active:
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Text(snapshot.data ?? ''), button],
+                  );
+                case ConnectionState.done:
+                  return const SizedBox();
+              }
+            }));
   }
 }
