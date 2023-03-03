@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_practise/logic/bloc/counter_bloc/bloc/counter_bloc.dart';
 import 'package:flutter_bloc_practise/presentation/router/app_router.dart';
+import 'package:flutter_bloc_practise/presentation/screens/home_screen/home_screen.dart';
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CounterBloc(),
+      create: (context) => PersonsBloc(),
       child: MaterialApp(
         title: Strings.appTitle,
         themeMode: ThemeMode.system,
