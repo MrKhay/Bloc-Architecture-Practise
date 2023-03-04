@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_practise/presentation/router/app_router.dart';
-import 'package:flutter_bloc_practise/presentation/screens/home_screen/home_screen.dart';
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
+import 'logic/bloc/person_bloc/person_bloc.dart';
 
 void main() {
   runApp(const MainApp());
