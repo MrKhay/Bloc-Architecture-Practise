@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_practise/data/api/login_api.dart';
 import 'package:flutter_bloc_practise/data/api/notes_api.dart';
+import 'package:flutter_bloc_practise/data/models/login_handle_model.dart';
 import 'package:flutter_bloc_practise/presentation/router/app_router.dart';
 
 import 'core/constants/strings.dart';
@@ -18,8 +19,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          LoginBloc(loginApi: LoginApi.instance(), notesApi: NotesApi()),
+      create: (context) => LoginBloc(
+          loginApi: LoginApi.instance(),
+          notesApi: NotesApi(),
+          acceptedLoginHandle: const LoginHandle.fooBar()),
       child: MaterialApp(
         title: Strings.appTitle,
         themeMode: ThemeMode.system,

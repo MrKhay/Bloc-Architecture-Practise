@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 part of 'login_bloc.dart';
 
 @immutable
@@ -26,4 +27,27 @@ class AppState {
   String toString() {
     return 'AppState(isLoading: $isLoading, loginErros: $loginErros, loginHandle: $loginHandle, fetchedNotes: $fetchedNotes)';
   }
+
+  @override
+  bool operator ==(covariant AppState other) {
+    final otherPropertiesAreEqual = isLoading == other.isLoading &&
+        loginErros == other.loginErros &&
+        loginHandle == other.loginHandle;
+
+    if (fetchedNotes == null && other.fetchedNotes == null) {
+      return otherPropertiesAreEqual;
+    } else {
+      return otherPropertiesAreEqual &&
+          (fetchedNotes?.isEqualTo(other.fetchedNotes) ?? true);
+    }
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(isLoading, loginErros, loginHandle, fetchedNotes);
+}
+
+extension UnorderEquality on Object {
+  bool isEqualTo(other) =>
+      const DeepCollectionEquality.unordered().equals(this, other);
 }

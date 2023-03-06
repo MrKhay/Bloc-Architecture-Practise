@@ -18,7 +18,7 @@ class LoginHandle {
   String toString() => 'LoginHandle(token: $token)';
 }
 
-enum LoginErros { invalidHnadle }
+enum LoginErros { invalidHandle }
 
 @immutable
 class Notes {

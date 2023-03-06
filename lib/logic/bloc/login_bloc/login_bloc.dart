@@ -1,5 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
+
 import 'package:flutter_bloc_practise/data/api/login_api.dart';
 import 'package:flutter_bloc_practise/data/api/notes_api.dart';
 import 'package:flutter_bloc_practise/data/models/login_handle_model.dart';
@@ -10,9 +13,13 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<AppAction, AppState> {
   final LoginApiProtocol loginApi;
   final NotesApiProtocol notesApi;
+  final LoginHandle acceptedLoginHandle;
 
-  LoginBloc({required this.loginApi, required this.notesApi})
-      : super(const AppState.empty()) {
+  LoginBloc({
+    required this.loginApi,
+    required this.notesApi,
+    required this.acceptedLoginHandle,
+  }) : super(const AppState.empty()) {
     on<LoginAction>((event, emit) async {
       // start loading
       emit(
@@ -32,7 +39,7 @@ class LoginBloc extends Bloc<AppAction, AppState> {
       emit(
         AppState(
             isLoading: false,
-            loginErros: loginHandle == null ? LoginErros.invalidHnadle : null,
+            loginErros: loginHandle == null ? LoginErros.invalidHandle : null,
             fetchedNotes: null,
             loginHandle: loginHandle),
       );
@@ -50,11 +57,11 @@ class LoginBloc extends Bloc<AppAction, AppState> {
         // get login handle
         final loginHandle = state.loginHandle;
 
-        if (loginHandle != const LoginHandle.fooBar()) {
+        if (loginHandle != acceptedLoginHandle) {
           emit(
             AppState(
                 isLoading: false,
-                loginErros: LoginErros.invalidHnadle,
+                loginErros: LoginErros.invalidHandle,
                 fetchedNotes: null,
                 loginHandle: loginHandle),
           );

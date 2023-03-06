@@ -31,7 +31,6 @@ class HomeScreen extends StatelessWidget {
             LoadingScreen.instance()
                 .show(context: context, text: Strings.pleasWait);
           } else {
-            print('Called hide');
             LoadingScreen.instance().hide();
           }
 
