@@ -9,7 +9,7 @@ class AppBlocView<T extends AppBloc> extends StatelessWidget {
 
   void startUpdatingBloc(BuildContext context) {
     final stream = Stream.periodic(
-            const Duration(seconds: 10), (_) => const LoadNextUrlEvent())
+            const Duration(seconds: 20), (_) => const LoadNextUrlEvent())
         .startWith(const LoadNextUrlEvent())
         .forEach((event) {
       context.read<T>().add(event);
