@@ -6,8 +6,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../core/constants/strings.dart';
 import '../../../logic/bloc/app_bloc/app_bloc.dart';
 
-class HomeScreen extends HookWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class RegistereScreen extends HookWidget {
+  const RegistereScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class HomeScreen extends HookWidget {
         useTextEditingController(text: 'foobarbazz'.ifDebugging);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(Strings.login),
+        title: const Text(Strings.register),
         elevation: 0,
         centerTitle: true,
       ),
@@ -47,29 +47,29 @@ class HomeScreen extends HookWidget {
                   const InputDecoration(hintText: Strings.enterYourPassword),
             ),
 
-            /// login [Button]
+            /// register [Button]
 
             TextButton(
               onPressed: () {
                 final email = emailController.text;
                 final password = passWordController.text;
                 context.read<AppBloc>().add(
-                      AppEventLogIn(
+                      AppEventRegister(
                         email: email,
                         passWord: password,
                       ),
                     );
               },
-              child: const Text(Strings.login),
+              child: const Text(Strings.register),
             ),
 
             /// not-registerd [Button]
 
             TextButton(
               onPressed: () {
-                context.read<AppBloc>().add(const AppEventGoToRegister());
+                context.read<AppBloc>().add(const AppEventGoToLogin());
               },
-              child: const Text(Strings.notRegisteredYet),
+              child: const Text(Strings.alreadyRegistered),
             ),
           ],
         ),

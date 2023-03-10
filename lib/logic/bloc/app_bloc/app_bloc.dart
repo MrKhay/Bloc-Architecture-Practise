@@ -206,7 +206,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     });
 
     /// go to registration
-    on<AppEventGoToRegistration>((event, emit) {
+    on<AppEventGoToRegister>((event, emit) {
       emit(const AppStateInRegistrationView(
         isLoading: false,
       ));

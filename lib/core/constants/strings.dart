@@ -1,6 +1,6 @@
 class Strings {
   /// App
-  static const appTitle = 'App Name';
+  static const appTitle = 'Photo Library';
 
   /// HomeScreen
   static const homeScreenTitle = 'Home Screen';
@@ -28,8 +28,18 @@ class Strings {
   static const invalidEmail = 'Invalid email';
   static const doubleCheckEmail =
       'Please double check your email and try again!';
-
+  static const photoGallery = 'Photo Gallery';
   static const emailInUse = 'Email already in use';
   static const chooseAnotherEmail =
       'Please choose another email to register with';
+
+  static const login = 'Log in';
+  static const logout = 'Log out';
+  static const deleteAccount = 'Delete account';
+  static const enterYourEmail = 'Enter your email here...';
+  static const enterYourPassword = 'Enter your password here...';
+  static const notRegisteredYet = 'Not registered yet? Register here!';
+  static const register = 'Resgister';
+  static const laoding = 'Loading....';
+  static const alreadyRegistered = 'Already registered? Log in her! ';
 }

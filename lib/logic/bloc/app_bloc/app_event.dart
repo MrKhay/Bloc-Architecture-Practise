@@ -37,8 +37,8 @@ class AppEventLogIn implements AppEvent {
 }
 
 @immutable
-class AppEventGoToRegistration implements AppEvent {
-  const AppEventGoToRegistration();
+class AppEventGoToRegister implements AppEvent {
+  const AppEventGoToRegister();
 }
 
 @immutable
