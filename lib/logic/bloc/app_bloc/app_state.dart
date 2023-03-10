@@ -2,56 +2,82 @@
 part of 'app_bloc.dart';
 
 @immutable
-class AppState {
+abstract class AppState {
   final bool isLoading;
-  final Uint8List? data;
-  final Object? error;
+  final AuthError? authError;
   const AppState({
     required this.isLoading,
-    this.data,
-    this.error,
+    this.authError,
+  });
+}
+
+@immutable
+class AppStateLoggedIn extends AppState {
+  final User user;
+  final Iterable<Reference> images;
+  const AppStateLoggedIn({
+    required this.images,
+    required this.user,
+    required super.isLoading,
+    super.authError,
   });
 
-  const AppState.empty()
-      : this(
-          isLoading: false,
-          data: null,
-          error: null,
-        );
-
   @override
-  String toString() => {
-        'isLoading': isLoading,
-        'hasData': data != null,
-        'error': error,
-      }.toString();
-
-  @override
-  bool operator ==(covariant AppState other) {
-    if (identical(this, other)) return true;
-
-    return other.isLoading == isLoading &&
-        (data ?? []).isEqual((other.data ?? [])) &&
-        other.error == error;
+  bool operator ==(covariant other) {
+    final otherClass = other;
+    if (otherClass is AppStateLoggedIn) {
+      return isLoading == otherClass.isLoading &&
+          user.uid == otherClass.user.uid &&
+          images.length == otherClass.images.length;
+    } else {
+      return false;
+    }
   }
 
   @override
-  int get hashCode => isLoading.hashCode ^ data.hashCode ^ error.hashCode;
+  int get hashCode => user.hashCode ^ images.hashCode;
+
+  @override
+  String toString() =>
+      'AppStateLoggedIn(user: $user, images: ${images.length})';
 }
 
-extension Comparison<E> on List<E> {
-  bool isEqual(List<E> other) {
-    if (identical(this, other)) {
-      return true;
+@immutable
+class AppStateLoggedOut extends AppState {
+  const AppStateLoggedOut({required super.isLoading, super.authError});
+
+  @override
+  String toString() {
+    return 'AppStateLoggedOut(isLoading: ${super.isLoading} authError:${super.authError})';
+  }
+}
+
+@immutable
+class AppStateInRegistrationView extends AppState {
+  const AppStateInRegistrationView({
+    required super.isLoading,
+    super.authError,
+  });
+}
+
+extension GetUser on AppState {
+  User? get user {
+    final cls = this;
+    if (cls is AppStateLoggedIn) {
+      return cls.user;
+    } else {
+      return null;
     }
-    if (length != other.length) {
-      return false;
+  }
+}
+
+extension GetImages on AppState {
+  Iterable<Reference>? get images {
+    final cls = this;
+    if (cls is AppStateLoggedIn) {
+      return cls.images;
+    } else {
+      return null;
     }
-    for (var i = 0; i < length; i++) {
-      if (this[i] != other[i]) {
-        return false;
-      }
-    }
-    return true;
   }
 }

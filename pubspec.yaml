@@ -8,10 +8,15 @@ environment:
 
 dependencies:
   bloc: ^8.1.1
+  firebase_auth: ^4.2.10
+  firebase_core: ^2.7.1
+  firebase_storage: ^11.0.15
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
   flutter_hooks: ^0.18.6
+  image_picker: ^0.8.6+4
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:

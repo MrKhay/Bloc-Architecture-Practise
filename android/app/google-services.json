@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "547571244130",
+    "project_id": "bloc-photo-libary",
+    "storage_bucket": "bloc-photo-libary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547571244130:android:2b4b99e6794d713e30453b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_bloc_practise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547571244130-dn2uh3cb7tk7d7jpb2rl14t39k4v4num.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFzXQHlea5KXaxsazybr5AWysRcptgiuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547571244130-dn2uh3cb7tk7d7jpb2rl14t39k4v4num.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
