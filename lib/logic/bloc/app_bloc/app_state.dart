@@ -22,6 +22,8 @@ class AppStateLoggedIn extends AppState {
     super.authError,
   });
 
+// when comparing with different state do it like this
+// so bloc knows without calculating much that the states re nt same
   @override
   bool operator ==(covariant other) {
     final otherClass = other;

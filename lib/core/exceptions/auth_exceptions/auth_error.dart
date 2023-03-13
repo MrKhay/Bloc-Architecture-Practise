@@ -11,7 +11,7 @@ const Map<String, AuthError> authErrorMapping = {
   'operation-not-allowed': AuthErrorOperationNotAllowed(),
   'email-already-in-use': AuthErrorEmailAlreadyInUse(),
   'requires-recent-login': AuthErrorRequireRecentLogin(),
-  'no-current-user': AuthErrorNoCurrentUser()
+  'no-current-user': AuthErrorNoCurrentUser(),
 };
 
 @immutable

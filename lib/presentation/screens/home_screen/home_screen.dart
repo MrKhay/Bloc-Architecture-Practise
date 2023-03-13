@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_practise/data/extension/if_debugging.dart';
+import 'package:flutter_bloc_practise/logic/extension/if_debugging.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../core/constants/strings.dart';
